@@ -1,0 +1,19 @@
+Resources:
+  MyQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: "my-queue-sqs"
+        DelaySeconds: 0
+        VisibilityTimeout: 900
+        ReceiveMessageWaitTimeSeconds: 1
+        RedrivePolicy:
+          deadLetterTargetArn: !GetAtt QueueDLQ.Arn
+          maxReceiveCount: 2
+            
+  QueueDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: "dead-letter-queue-dlq"
+        DelaySeconds: 0
+        VisibilityTimeout: 900
+        ReceiveMessageWaitTimeSeconds: 1
