@@ -1,0 +1,22 @@
+Parameters:
+  Env:
+    Type: String
+
+Conditions:
+  isProdCondition: !Equals [!Ref Env, "prod"]
+
+Resources:
+  LambdaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/lambda-name"
+      RetentionInDays: !If
+        - isProdCondition
+        - !Ref "AWS::NoValue"
+        - 14
+
+  ECSServiceLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      RetentionInDays: 365
+      LogGroupName: !Sub "fargate/fargate-name"
