@@ -17,3 +17,4 @@ Resources:
         DelaySeconds: 0
         VisibilityTimeout: 900
         ReceiveMessageWaitTimeSeconds: 1
+        MessageRetentionPeriod: 1209600 # 14 days
