@@ -1,0 +1,5 @@
+Resources:
+  DocumentationContentS3:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub s3-bucket-${AWS::Region}
